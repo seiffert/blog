@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     jdbc,
     anorm,
     "jp.t2v" %% "play21.auth" % "0.7",
-    "org.mindrot" % "jbcrypt" % "0.3m"
+    "org.mindrot" % "jbcrypt" % "0.3m",
+    "postgresql" % "postgresql" % "8.4-702.jdbc4"
   )
 
 
