@@ -1,0 +1,17 @@
+@(postForm: Form[BlogPost], user: Admin = null)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Blog | Add a new post", "Add a new Blog Post!", user) {
+    @form(action = routes.BlogPosts.saveNew) {
+        @inputText(postForm("title"), '_label -> "Title")
+        @textarea(postForm("body"), '_label -> "Body")
+        <button type="submit" class="btn">Create!</button>
+    }
+    
+    <script src="/assets/javascripts/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('body');
+    </script>
+}

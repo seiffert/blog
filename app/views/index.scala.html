@@ -1,0 +1,10 @@
+@(posts: List[BlogPost], user: Admin = null)
+
+@main("Blog", "by Paul Seiffert", user) {
+    @posts.map { post =>
+        <div class="blog-post">
+            <div class="blog-post-subject"><h3>@post.title</h3></div>
+            <div class="blog-post-body">@Html(post.body)</div>
+        </div>
+    }
+}

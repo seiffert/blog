@@ -1,0 +1,38 @@
+@(title: String, header: String, user: Admin = null)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    </head>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>Blog <small>@header</small></h1>
+            </div>
+  
+            <div class="col">
+                <div class="span9">
+                    @content
+                </div>
+                <div class="span2">
+                    <ul class="nav nav-pills nav-stacked">
+                        @if(null != user) {
+                            <li><a href="@routes.BlogPosts.add">Add Post</a></li>
+                            <li><a href="@routes.Auth.logout">Logout</a></li>
+                        } else {
+                            <li><a href="@routes.Auth.index">Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+    </body>
+</html>

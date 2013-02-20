@@ -1,0 +1,12 @@
+@(loginForm: Form[Option[models.Admin]])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Blog | Authenticate", "Please Login!") {
+    @form(routes.Auth.authenticate) {
+        @inputText(loginForm("username"), '_label -> "Username")
+        @inputPassword(loginForm("password"), '_label -> "Password")
+        <button type="submit" class="btn">Login!</button>
+    }
+}
