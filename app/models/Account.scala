@@ -18,7 +18,9 @@ object Account {
   implicit val rowToPermission: Column[Permission] = {
     Column.nonNull[Permission] { (value, meta) =>
       value match {
+        case "Administrator" => Right(Administrator)
         case Clob("Administrator") => Right(Administrator)
+        case "NormalUser" => Right(NormalUser)
         case Clob("NormalUser") => Right(NormalUser)
         case _ => Left(TypeDoesNotMatch(
           "Cannot convert %s : %s to Permission for column %s".format(value, value.getClass, meta.column)))
