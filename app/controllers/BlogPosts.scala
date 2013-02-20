@@ -8,7 +8,7 @@ import models.BlogPost
 import jp.t2v.lab.play20.auth.{Auth => AuthTrait}
 import models.Administrator
 
-object BlogPosts extends Controller with AuthTrait with AdminAuthConfig {
+object BlogPosts extends Controller with AuthTrait with AuthConfig {
   
   val blogPostForm = Form(
           mapping(

@@ -5,14 +5,14 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import models.Admin
+import models.Account
 
-object Auth extends Controller with LoginLogout with AdminAuthConfig {
+object Auth extends Controller with LoginLogout with AuthConfig {
 
   val loginForm = Form {
     mapping(
       "username" -> nonEmptyText,
-      "password" -> text)(Admin.authenticate)(_.map(u => (u.username, "")))
+      "password" -> text)(Account.authenticate)(_.map(u => (u.username, "")))
       .verifying("Invalid username or password", result => result.isDefined)
   }
 

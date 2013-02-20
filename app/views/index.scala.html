@@ -1,4 +1,4 @@
-@(posts: List[BlogPost], user: Admin = null)
+@(posts: List[BlogPost], user: Account = null)
 
 @main("Blog", "by Paul Seiffert", user) {
     @posts.map { post =>
