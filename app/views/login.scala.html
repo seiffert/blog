@@ -4,9 +4,9 @@
 @import helper.twitterBootstrap._
 
 @main("Please Login!") {
-    @form(routes.Auth.authenticate) {
-        @inputText(loginForm("username"), '_label -> "Username")
-        @inputPassword(loginForm("password"), '_label -> "Password")
-        <button type="submit" class="btn">Login!</button>
-    }
+  @form(routes.Auth.authenticate) {
+    @inputText(loginForm("username"), '_label -> "Username")
+    @inputPassword(loginForm("password"), '_label -> "Password")
+    <button type="submit" class="btn">Login!</button>
+  }
 }

@@ -11,12 +11,12 @@ import models.Administrator
 object BlogPosts extends Controller with AuthTrait with AuthConfig {
   
   val blogPostForm = Form(
-          mapping(
-            "title" -> nonEmptyText,
-            "body" -> text
-          )((title, body) => BlogPost(title, body))
-           ((post: BlogPost) => Some(post.title, post.body))
-      )
+    mapping(
+      "title" -> nonEmptyText,
+      "body" -> text
+    ) ((title, body) => BlogPost(title, body))
+      ((post: BlogPost) => Some(post.title, post.body))
+    )
   
   def index = Action {
     Ok(views.html.frontend.index(BlogPost.all()))
