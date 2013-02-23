@@ -53,7 +53,7 @@ object BlogPost {
   
   def remove(id: Long) {
     DB.withConnection { implicit c => 
-      SQL("DELETE from blog_post WHERE id = {id} LIMIT 1").on(
+      SQL("DELETE from blog_post WHERE id = {id}").on(
         'id -> id
       ).executeUpdate()
     }
