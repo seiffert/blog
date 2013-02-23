@@ -1,0 +1,10 @@
+@(post: BlogPost)
+
+@frontend.layout(post.title) {
+  <div class="blog-post">
+    <div class="blog-post-subject"><h3><a href="@routes.BlogPosts.details(post.id)">@post.title</a></h3></div>
+    <div class="blog-post-body">@Html(post.body)</div>
+  </div>
+  
+  <a href="@routes.BlogPosts.index" class="btn"><i class="icon-arrow-left"></i> Back</a>
+}

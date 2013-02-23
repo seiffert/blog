@@ -20,6 +20,12 @@ object BlogPost {
     }
   }
   
+  def findOneById(id: Int): BlogPost = DB.withConnection { implicit c => 
+    SQL("select * from blog_post where id = {id}").on(
+      'id -> id
+    ).as(blogPost.single)
+  }
+  
   def all(): List[BlogPost] = DB.withConnection { implicit c =>
     SQL("select * from blog_post order by publish_date DESC").as(blogPost *)
   }

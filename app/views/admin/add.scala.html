@@ -7,7 +7,7 @@
   @form(action = routes.BlogPosts.saveNew) {
     @inputText(postForm("title"), '_label -> "Title")
     @textarea(postForm("body"), '_label -> "Body")
-    <a href="@routes.Admin.index" class="btn"><i class="icon-backward"></i> Back</a>
+    <a href="@routes.Admin.index" class="btn"><i class="icon-arrow-left"></i> Back</a>
     <button type="submit" class="btn btn-success pull-right">Create!</button>
   }
     

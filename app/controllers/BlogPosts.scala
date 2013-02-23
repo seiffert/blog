@@ -22,6 +22,10 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
     Ok(views.html.frontend.index(BlogPost.all()))
   }
   
+  def details(id: Int) = Action {
+    Ok(views.html.frontend.details(BlogPost.findOneById(id)))
+  }
+  
   def add = authorizedAction(Administrator) { user => implicit request =>
     Ok(views.html.admin.add(blogPostForm))
   }

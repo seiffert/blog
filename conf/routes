@@ -4,8 +4,9 @@
 
 # Home page
 GET     /                           controllers.BlogPosts.index
+GET     /post/:id                   controllers.BlogPosts.details(id: Int)
 GET     /add                        controllers.BlogPosts.add
-POST    /saveNew                    controllers.BlogPosts.saveNew()
+POST    /saveNew                    controllers.BlogPosts.saveNew
 GET     /login                      controllers.Auth.index
 POST    /login                      controllers.Auth.authenticate
 GET     /logout                     controllers.Auth.logout

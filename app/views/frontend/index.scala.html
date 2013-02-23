@@ -3,7 +3,7 @@
 @frontend.layout("by Paul Seiffert") {
   @posts.map { post =>
     <div class="blog-post">
-      <div class="blog-post-subject"><h3>@post.title</h3></div>
+      <div class="blog-post-subject"><h3><a href="@routes.BlogPosts.details(post.id)">@post.title</a></h3></div>
       <div class="blog-post-body">@Html(post.body)</div>
     </div>
   }
