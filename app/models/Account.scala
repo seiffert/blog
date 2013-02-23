@@ -39,10 +39,10 @@ object Account {
   }
 
   def authenticate(username: String, password: String): Option[Account] = {
-    findByEmail(username).filter { account => BCrypt.checkpw(password, account.password) }
+    findOneByUsername(username).filter { account => BCrypt.checkpw(password, account.password) }
   }
 
-  def findByEmail(username: String): Option[Account] = {
+  def findOneByUsername(username: String): Option[Account] = {
     DB.withConnection { implicit connection =>
       SQL("SELECT * FROM account WHERE username = {username}").on(
         'username -> username
@@ -50,7 +50,7 @@ object Account {
     }
   }
 
-  def findById(id: String): Option[Account] = {
+  def findOneById(id: String): Option[Account] = {
     DB.withConnection { implicit connection =>
       SQL("SELECT * FROM account WHERE id = {id}").on(
         'id -> id

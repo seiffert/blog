@@ -47,7 +47,7 @@ trait AuthConfig extends BaseAuthConfig {
    * A function that returns a `User` object from an `Id`.
    * You can alter the procedure to suit your application.
    */
-  def resolveUser(id: Id): Option[Account] = Account.findById(id)
+  def resolveUser(id: Id): Option[Account] = Account.findOneById(id)
 
   /**
    * Where to redirect the user after a successful login.
