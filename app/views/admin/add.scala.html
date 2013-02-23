@@ -1,13 +1,14 @@
-@(postForm: Form[BlogPost], user: Account = null)
+@(postForm: Form[BlogPost])
 
 @import helper._
 @import helper.twitterBootstrap._
 
-@main("Blog | Add a new post", "Add a new Blog Post!", user) {
+@main("Add a new Post!") {
     @form(action = routes.BlogPosts.saveNew) {
         @inputText(postForm("title"), '_label -> "Title")
         @textarea(postForm("body"), '_label -> "Body")
-        <button type="submit" class="btn">Create!</button>
+        <a href="@routes.Admin.index" class="btn"><i class="icon-backward"></i> Back</a>
+        <button type="submit" class="btn btn-success pull-right">Create!</button>
     }
     
     <script src="/assets/javascripts/ckeditor/ckeditor.js"></script>

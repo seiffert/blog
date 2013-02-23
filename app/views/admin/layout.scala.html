@@ -1,0 +1,18 @@
+@(title: String)(content: Html)
+
+@main(title) {
+    <div class="col">
+        <div class="span9">
+            @content
+        </div>
+        <div class="span2">
+            <ul class="nav nav-list">
+                <li class="nav-header">Actions</li>
+                <li><a href="@routes.BlogPosts.add">Add new Post</a></li>
+                <li class="nav-header">Navigation</li>
+                <li><a href="@routes.BlogPosts.index">Frontend</a></li>
+                <li><a href="@routes.Auth.logout">logout</a></li>
+            </ul>
+        </div>
+    </div>
+}

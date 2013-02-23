@@ -1,6 +1,6 @@
-@(posts: List[BlogPost], user: Account = null)
+@(posts: List[BlogPost])
 
-@main("Blog", "by Paul Seiffert", user) {
+@frontend.layout("by Paul Seiffert") {
     @posts.map { post =>
         <div class="blog-post">
             <div class="blog-post-subject"><h3>@post.title</h3></div>

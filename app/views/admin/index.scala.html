@@ -1,0 +1,7 @@
+@(posts: List[BlogPost])
+
+@admin.layout("Administration") {
+    @posts.map { post =>
+        @println(post)
+    }
+}

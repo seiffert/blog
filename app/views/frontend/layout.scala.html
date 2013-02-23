@@ -1,0 +1,14 @@
+@(title: String)(content: Html)
+
+@main(title) {
+    <div class="col">
+        <div class="span9">
+            @content
+        </div>
+        <div class="span2">
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="@routes.Admin.index">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+}

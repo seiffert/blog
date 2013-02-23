@@ -17,18 +17,18 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
           )(BlogPost.apply)(BlogPost.unapply)
       )
   
-  def index = optionalUserAction { maybeUser => request =>
-    Ok(views.html.index(BlogPost.all(), maybeUser.getOrElse(null)))
+  def index = Action {
+    Ok(views.html.frontend.index(BlogPost.all()))
   }
   
   def add = authorizedAction(Administrator) { user => implicit request =>
-    Ok(views.html.add(blogPostForm, user))
+    Ok(views.html.admin.add(blogPostForm))
   }
   
   def saveNew = authorizedAction(Administrator) { user => implicit request =>
     blogPostForm.bindFromRequest.fold(
       formWithErrors => {
-        BadRequest(views.html.add(formWithErrors))
+        BadRequest(views.html.admin.add(formWithErrors))
       },
       value => {
         BlogPost.persist(value)
