@@ -3,19 +3,20 @@ package models
 import anorm._
 import anorm.SqlParser._
 import play.api.db._
+import play.Logger
 import play.api.Play.current
+import java.util.Date
 
-case class BlogPost(title: String, body: String) {
-    var id: Int = 0
-}
+case class BlogPost(title: String, body: String, id: Int = 0, publishedDate: Date = null)
 
 object BlogPost {
   
   val blogPost = {
     get[Int]("id") ~
     get[String]("title") ~
-    get[String]("body") map {
-      case id~title~body => BlogPost(title, body)
+    get[String]("body") ~
+    get[Date]("publish_date") map {
+      case id~title~body~date => BlogPost(title, body, id, date)
     }
   }
   
@@ -50,6 +51,12 @@ object BlogPost {
       }
   }
   
-  def delete(id: Long) {}
+  def remove(id: Long) {
+      DB.withConnection { implicit c => 
+          SQL("DELETE from blog_post WHERE id = {id} LIMIT 1").on(
+              'id -> id
+          ).executeUpdate()
+      }
+  }
   
 }

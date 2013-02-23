@@ -14,7 +14,8 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
           mapping(
             "title" -> nonEmptyText,
             "body" -> text
-          )(BlogPost.apply)(BlogPost.unapply)
+          )((title, body) => BlogPost(title, body))
+           ((post: BlogPost) => Some(post.title, post.body))
       )
   
   def index = Action {
@@ -25,6 +26,11 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
     Ok(views.html.admin.add(blogPostForm))
   }
   
+  def remove(id: Int) = authorizedAction(Administrator) { user => implicit request =>
+    BlogPost.remove(id)
+    Redirect(routes.Admin.index)
+  }
+  
   def saveNew = authorizedAction(Administrator) { user => implicit request =>
     blogPostForm.bindFromRequest.fold(
       formWithErrors => {
@@ -32,7 +38,7 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
       },
       value => {
         BlogPost.persist(value)
-        Redirect(routes.BlogPosts.index)
+        Redirect(routes.Admin.index)
       }
     )
   }

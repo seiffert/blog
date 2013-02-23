@@ -1,7 +1,26 @@
 @(posts: List[BlogPost])
 
 @admin.layout("Administration") {
+    
+    <table class="table table-striped table-bordered">
+    
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    
     @posts.map { post =>
-        @println(post)
+        <tr>
+            <td>@post.id</td>
+            <td>@post.title</td>
+            <td>@post.publishedDate.format("dd MMMM yyyy, hh:mm:ss")</td>
+            <td>
+                <a href="@routes.BlogPosts.remove(post.id)"><i class="icon-remove"></i></a>
+            </td>
+        </tr>
     }
+    
+    </table>
 }
