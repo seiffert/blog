@@ -10,7 +10,7 @@ POST    /saveNew                    controllers.BlogPosts.saveNew
 GET     /login                      controllers.Auth.index
 POST    /login                      controllers.Auth.authenticate
 GET     /logout                     controllers.Auth.logout
-
+GET     /imprint                    controllers.Static.imprint
 GET     /admin                      controllers.Admin.index
 GET     /remove/:id                 controllers.BlogPosts.remove(id: Int)
 

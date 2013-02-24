@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(content: Html)(navigation: Html)
 
 @main(title) {
   <div class="col">
@@ -6,9 +6,7 @@
       @content
     </div>
     <div class="span2">
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="@routes.Admin.index">Admin</a></li>
-      </ul>
+      @navigation
     </div>
   </div>
 }
