@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, scripts: List[String] = Nil)(content: Html)
 
 <!DOCTYPE html>
 
@@ -23,7 +23,7 @@
       
       <div class="footer">
         <ul class="nav ">
-          <li><a href="@routes.Static.imprint" class="pull-left">Imprint</a></li>
+          <li><a href="@routes.Static.imprint" class="pull-left">Legal Information</a></li>
           <li><a href="@routes.Admin.index" class="pull-right">Admin</a></li>
         </ul>
         <div class="clearfix"></div>
@@ -34,6 +34,10 @@
 
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+    
+    @scripts.map { script => 
+      <script src="@routes.Assets.at(script)" type="text/javascript"></script>
+    }
     
     <script type="text/javascript">
 

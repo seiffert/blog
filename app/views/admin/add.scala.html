@@ -3,16 +3,16 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main("Add a new Post!") {
+@main("Add a new Post!", List("epiceditor/js/epiceditor.js", "javascripts/app/addBlogPost.js")) {
   @form(action = routes.BlogPosts.saveNew) {
     @inputText(postForm("title"), '_label -> "Title")
-    @textarea(postForm("body"), '_label -> "Body")
-    <a href="@routes.Admin.index" class="btn btn-mini"><i class="icon-arrow-left"></i> Back</a>
-    <button type="submit" class="btn btn-success pull-right">Create!</button>
-  }
+        
+    <input type="hidden" name="body" id="blogPostBody" />
+    <div id="epiceditor" class="postBodyEditor"></div>
     
-  <script src="/assets/javascripts/ckeditor/ckeditor.js"></script>
-  <script type="text/javascript">
-    CKEDITOR.replace('body');
-  </script>
+    <div class="row">
+      <a href="@routes.Admin.index" class="btn btn-mini"><i class="icon-arrow-left"></i> Back</a>
+      <button id="addBlogPostSubmit" class="btn btn-success pull-right">Create!</button>
+    </div>
+  }
 }

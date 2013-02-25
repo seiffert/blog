@@ -1,6 +1,6 @@
-@(title: String)(content: Html)(navigation: Html)
+@(title: String, scripts: List[String] = Nil)(content: Html)(navigation: Html)
 
-@main(title) {
+@main(title, scripts) {
   <div class="col">
     <div class="span9">
       @content

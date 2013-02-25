@@ -2,3 +2,11 @@
   text-decoration: none;
   color: #333;
 }
+
+.postBodyEditor {
+  margin-bottom: 20px;
+  border:1px solid #000;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 2px 5px;
+  border-radius: 3px;
+  margin-top: 20px;
+}
