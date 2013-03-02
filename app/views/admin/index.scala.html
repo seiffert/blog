@@ -14,7 +14,9 @@
   @posts.map { post =>
     <tr>
       <td>@post.id</td>
-      <td>@post.title</td>
+      <td>
+        <a href="@routes.BlogPosts.details(post.id)">@post.title</a>
+      </td>
       <td>@post.publishedDate.format("dd MMMM yyyy, hh:mm:ss")</td>
       <td>
         <a href="@routes.BlogPosts.remove(post.id)"><i class="icon-remove"></i></a>
