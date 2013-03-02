@@ -2,7 +2,7 @@
 
 @frontend.layout(post.title, List("javascripts/Markdown.Converter.js", "javascripts/Markdown.Sanitizer.js", "javascripts/app/index.js")) {
   <div class="blog-post">
-    <div class="blog-post-subject"><h3>@post.title</h3></div>
+    <div class="blog-post-subject"><h3>@post.title <small>@post.publishedDate</small></h3></div>
     <div class="blog-post-body">@Html(post.body)</div>
   </div>
   

@@ -3,7 +3,7 @@
 @frontend.layout("by Paul Seiffert", List("javascripts/Markdown.Converter.js", "javascripts/Markdown.Sanitizer.js", "javascripts/app/index.js")) {
   @posts.map { post =>
     <div class="blog-post">
-      <div class="blog-post-subject"><h3><a href="@routes.BlogPosts.details(post.id)">@post.title</a></h3></div>
+      <div class="blog-post-subject"><h3><a href="@routes.BlogPosts.details(post.id)">@post.title <small>@post.publishedDate</small></a></h3></div>
       <div class="blog-post-body" style="display: none">@post.body</div>
     </div>
     
