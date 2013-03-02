@@ -1,9 +1,48 @@
-@(post: BlogPost)
+@(post: BlogPost, comments: List[Comment], commentForm: Form[Comment])
 
-@frontend.layout(post.title, List("javascripts/Markdown.Converter.js", "javascripts/Markdown.Sanitizer.js", "javascripts/app/index.js")) {
+@import helper._
+@import helper.twitterBootstrap._
+
+@frontend.layout(post.title, List(
+    "javascripts/Markdown.Converter.js", "javascripts/Markdown.Sanitizer.js", "javascripts/app/index.js",
+    "epiceditor/js/epiceditor.js", "javascripts/app/addComment.js")
+  ) {
   <div class="blog-post">
     <div class="blog-post-subject"><h3>@post.title <small>@post.publishedDate</small></h3></div>
     <div class="blog-post-body">@Html(post.body)</div>
+  </div>
+  
+  <hr />
+  
+  <div class="comments">
+    <a data-toggle="collapse" data-target="#new-comment-form">
+      Add a comment
+    </a>
+    <div class="new-comment-form collapse" id="new-comment-form">
+      @form(action = routes.BlogPosts.addComment(post.id)) {
+        <fieldset>
+          @inputText(commentForm("name"), '_label -> "Name")
+          @inputText(commentForm("email"), '_label -> "E-Mail")
+        
+          <input type="hidden" name="blogPostId" value="@post.id" />
+        
+          <div class="clearfix" id="commentBody_field">
+              <label for="commentBody">Body</label>
+              <div class="input">
+                <div id="epiceditor" class="commentEditor"></div>
+                <input type="hidden" name="commentBody" id="commentBody" />
+              </div>
+          </div>
+    
+          <button id="addCommentSubmit" class="btn btn-success pull-right">Add comment!</button>
+        </fieldset>
+      }
+    </div>
+    
+    @comments.map { comment =>
+      <div class="comment-author"><strong>@comment.author</strong> <small>@comment.date</small></a></div>
+      <div class="comment-body">@comment.body</div>
+    }
   </div>
   
   <hr />
