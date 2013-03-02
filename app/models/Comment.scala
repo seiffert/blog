@@ -22,7 +22,9 @@ object Comment {
   }
   
   def allOfPost(blogPostId: Int): List[Comment] = DB.withConnection { implicit c =>
-    SQL("select * from comment order by date DESC").as(comment *)
+    SQL("select * from comment where blogPostId = {blogPostId} order by date DESC").on(
+      'blogPostId -> blogPostId
+    ).as(comment *)
   }
   
   def saveNew(comment: Comment) {

@@ -33,16 +33,24 @@
                 <input type="hidden" name="commentBody" id="commentBody" />
               </div>
           </div>
+          
+          <div class="clearfix comment-captcha">
+            @Html(views.ReCaptcha.render())
+          </div>
     
           <button id="addCommentSubmit" class="btn btn-success pull-right">Add comment!</button>
         </fieldset>
       }
     </div>
     
-    @comments.map { comment =>
-      <div class="comment-author"><strong>@comment.author</strong> <small>@comment.date</small></a></div>
-      <div class="comment-body">@comment.body</div>
-    }
+    <div class="comments-wrapper">
+      @comments.map { comment =>
+        <div class="comment">
+          <div class="comment-author"><strong>@comment.author</strong> <small>@comment.date</small></a></div>
+          <div class="comment-body">@comment.body</div>
+        </div>
+      }
+    </div>
   </div>
   
   <hr />

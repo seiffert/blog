@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.{BlogPost, Administrator, Comment}
 import jp.t2v.lab.play20.auth.{Auth => AuthTrait}
+import views.ReCaptcha
 
 object BlogPosts extends Controller with AuthTrait with AuthConfig {
   
@@ -25,7 +26,14 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
       "commentBody" -> nonEmptyText
     ) ((blogPostId, name, email, commentBody) => Comment(blogPostId, name, email, commentBody))
       ((comment: Comment) => Some(comment.blogPostId, comment.author, comment.authorEmail, comment.body))
+  )
+  
+  val captchaForm = Form[(String, String)](
+    tuple(
+      "recaptcha_challenge_field" -> nonEmptyText,
+      "recaptcha_response_field" -> nonEmptyText
     )
+  )
   
   def index = Action {
     Ok(views.html.frontend.index(BlogPost.all()))
@@ -35,12 +43,23 @@ object BlogPosts extends Controller with AuthTrait with AuthConfig {
     Ok(views.html.frontend.details(BlogPost.findOneById(id), Comment.allOfPost(id), commentForm))
   }
   
-  def addComment(id: Int) = Action { implicit request => {
-      commentForm.bindFromRequest.fold(
-        formWithErrors =>{ println(formWithErrors); BadRequest(views.html.frontend.details(BlogPost.findOneById(id), Comment.allOfPost(id), formWithErrors))},
-        value => {
-          Comment.saveNew(value)
-          Redirect(routes.BlogPosts.details(id))
+    def addComment(id: Int) = Action { implicit request => {
+      captchaForm.bindFromRequest.fold(
+        failure => BadRequest(views.html.frontend.details(BlogPost.findOneById(id), Comment.allOfPost(id), commentForm)),
+        {
+          case (q, a) => {
+            if (ReCaptcha.check("localhost", q, a)) {
+              commentForm.bindFromRequest.fold(
+                formWithErrors => BadRequest(views.html.frontend.details(BlogPost.findOneById(id), Comment.allOfPost(id), formWithErrors)),
+                value => {
+                  Comment.saveNew(value)
+                  Redirect(routes.BlogPosts.details(id))
+                }
+              )
+            } else {
+              BadRequest(views.html.frontend.details(BlogPost.findOneById(id), Comment.allOfPost(id), commentForm))
+            }
+          }
         }
       )
     }
