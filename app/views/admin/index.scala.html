@@ -21,6 +21,14 @@
       </td>
     </tr>
   }
+  
+  @if(posts.isEmpty) {
+    <tr>
+      <td colspan="4" class="text-center">
+        You haven't written any posts yet!
+      </td>
+    </tr>
+  }
     
   </table>
 }
